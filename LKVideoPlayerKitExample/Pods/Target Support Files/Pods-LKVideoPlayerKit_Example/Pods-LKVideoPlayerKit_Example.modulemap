@@ -1,0 +1,6 @@
+framework module Pods_LKVideoPlayerKit_Example {
+  umbrella header "Pods-LKVideoPlayerKit_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

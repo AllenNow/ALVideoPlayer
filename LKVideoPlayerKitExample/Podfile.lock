@@ -1,0 +1,29 @@
+PODS:
+  - LKVideoPlayerKit (0.0.7):
+    - Masonry
+    - SDWebImage
+  - Masonry (1.1.0)
+  - SDWebImage (5.10.0):
+    - SDWebImage/Core (= 5.10.0)
+  - SDWebImage/Core (5.10.0)
+
+DEPENDENCIES:
+  - LKVideoPlayerKit (from `../`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Masonry
+    - SDWebImage
+
+EXTERNAL SOURCES:
+  LKVideoPlayerKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LKVideoPlayerKit: 1c12f38abbd93124b33d4a5c4ea8abe6ce0249bb
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
+
+PODFILE CHECKSUM: b988f8e69481e24a8b549c2fc3456ec91763f915
+
+COCOAPODS: 1.10.1

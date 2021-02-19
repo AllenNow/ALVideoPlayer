@@ -1,0 +1,19 @@
+# 第一行 source 必须写公司私有库，使用 SSH 地址
+source 'http://git.luckincoffee.com/ios-team/LuckySpace.git'
+# 第二行 source 必须写官方公开库，使用 HTTP 地址
+#source 'https://cdn.cocoapods.org/'
+source 'https://github.com/CocoaPods/Specs.git'
+
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'LKVideoPlayerKit_Example' do
+  pod 'LKVideoPlayerKit', :path => '../'
+
+  target 'LKVideoPlayerKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

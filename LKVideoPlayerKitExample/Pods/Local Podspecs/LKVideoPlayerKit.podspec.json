@@ -1,0 +1,46 @@
+{
+  "name": "LKVideoPlayerKit",
+  "version": "0.0.7",
+  "summary": "A short description of LKVideoPlayerKit.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "http://git.luckincoffee.com/lkm-dev/MediaBrowseKit-iOS",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "allen": "haibi.gao@luckincoffee.com"
+  },
+  "source": {
+    "git": "http://git.luckincoffee.com/lkm-dev/MediaBrowseKit-iOS.git",
+    "tag": "0.0.7"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "LKVideoPlayerKit/Classes/**/*.{h,m}",
+  "public_header_files": "LKVideoPlayerKit/Classes/*.h",
+  "resource_bundles": {
+    "LKVideoPlayerKit": [
+      "LKVideoPlayerKit/Assets/*.png"
+    ]
+  },
+  "static_framework": true,
+  "frameworks": "AVKit",
+  "libraries": [
+    "sqlite3.0",
+    "bz2",
+    "z",
+    "c++",
+    "iconv.2.4.0"
+  ],
+  "dependencies": {
+    "Masonry": [
+
+    ],
+    "SDWebImage": [
+
+    ]
+  },
+  "vendored_frameworks": "LKVideoPlayerKit/*.framework"
+}
