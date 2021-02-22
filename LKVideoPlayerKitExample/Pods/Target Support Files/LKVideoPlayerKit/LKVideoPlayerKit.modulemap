@@ -1,6 +1,0 @@
-framework module LKVideoPlayerKit {
-  umbrella header "LKVideoPlayerKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

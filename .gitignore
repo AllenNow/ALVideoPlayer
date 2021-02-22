@@ -34,34 +34,6 @@ Carthage/Build
 # Note: if you ignore the Pods directory, make sure to uncomment
 # `pod install` in .travis.yml
 #
-# Pods/
-LKVideoPlayerKit/IJKMediaFramework.framework/IJKMediaFramework
-LKVideoPlayerKit/IJKMediaFramework.framework/Info.plist
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKAVMoviePlayerController.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKFFMonitor.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKFFMoviePlayerController.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKFFOptions.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKKVOController.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKMediaFramework.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKMediaModule.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKMediaPlayback.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKMediaPlayer.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKMPMoviePlayerController.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKNotificationManager.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Headers/IJKSDLGLViewProtocol.h
-LKVideoPlayerKit/IJKMediaFramework.framework/Modules/module.modulemap
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/IJKMediaFramework
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Info.plist
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKAVMoviePlayerController.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKFFMonitor.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKFFMoviePlayerController.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKFFOptions.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKKVOController.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKMediaFramework.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKMediaModule.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKMediaPlayback.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKMediaPlayer.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKMPMoviePlayerController.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKNotificationManager.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Headers/IJKSDLGLViewProtocol.h
-LKVideoPlayerKitExample/Pods/LuckinIJKPlayer/LuckinIJKPlayer/Framework/IJKMediaFramework.framework/Modules/module.modulemap
+Pods/
+IJKMediaFramework.framework/
+

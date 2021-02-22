@@ -1,29 +1,65 @@
 PODS:
-  - LKVideoPlayerKit (0.0.7):
+  - LKVideoPlayer (0.0.7):
+    - LKVideoPlayer/Manager (= 0.0.7)
+    - LKVideoPlayer/Model (= 0.0.7)
+    - LKVideoPlayer/Tool (= 0.0.7)
+    - LKVideoPlayer/View (= 0.0.7)
     - Masonry
+    - NEDMacros
     - SDWebImage
+  - LKVideoPlayer/Manager (0.0.7):
+    - Masonry
+    - NEDMacros
+    - SDWebImage
+  - LKVideoPlayer/Model (0.0.7):
+    - Masonry
+    - NEDMacros
+    - SDWebImage
+  - LKVideoPlayer/Tool (0.0.7):
+    - Masonry
+    - NEDMacros
+    - SDWebImage
+  - LKVideoPlayer/View (0.0.7):
+    - Masonry
+    - NEDMacros
+    - SDWebImage
+  - LookinServer (1.0.0)
   - Masonry (1.1.0)
+  - NEDMacros (0.1.0)
   - SDWebImage (5.10.0):
     - SDWebImage/Core (= 5.10.0)
   - SDWebImage/Core (5.10.0)
 
 DEPENDENCIES:
-  - LKVideoPlayerKit (from `../`)
+  - LKVideoPlayer (from `../`)
+  - LookinServer
+  - "NEDMacros (from `git@gitlab.miguan.com:mobile-platform/NEDMacros-iOS.git`, branch `master`)"
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - LookinServer
     - Masonry
     - SDWebImage
 
 EXTERNAL SOURCES:
-  LKVideoPlayerKit:
+  LKVideoPlayer:
     :path: "../"
+  NEDMacros:
+    :branch: master
+    :git: "git@gitlab.miguan.com:mobile-platform/NEDMacros-iOS.git"
+
+CHECKOUT OPTIONS:
+  NEDMacros:
+    :commit: 34ccdec37035877e7ab1f87f0b12f9034cfe7819
+    :git: "git@gitlab.miguan.com:mobile-platform/NEDMacros-iOS.git"
 
 SPEC CHECKSUMS:
-  LKVideoPlayerKit: 1c12f38abbd93124b33d4a5c4ea8abe6ce0249bb
+  LKVideoPlayer: 6843bddedad97525507e402a0aef5ac491d54ccc
+  LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  NEDMacros: e6415f5fdcf2f0b39bfb10655fc3e15f53386ae2
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
 
-PODFILE CHECKSUM: b988f8e69481e24a8b549c2fc3456ec91763f915
+PODFILE CHECKSUM: f82efdce953732dabbf96476a548be99e544f390
 
 COCOAPODS: 1.10.1

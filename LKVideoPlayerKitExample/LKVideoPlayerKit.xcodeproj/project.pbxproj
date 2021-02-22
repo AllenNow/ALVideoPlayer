@@ -23,7 +23,6 @@
 		86BDA1C825185670BC1C07B9 /* Pods_LKVideoPlayerKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5030F521CF745B34F2962653 /* Pods_LKVideoPlayerKit_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		9FB6107C2452B2F5007F6692 /* LKMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6107B2452B2F5007F6692 /* LKMViewController.m */; };
-		D421DAC2B1AFE1EF0E53D408 /* Pods_LKVideoPlayerKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C76DA60D931C1EAA633268C /* Pods_LKVideoPlayerKit_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0106ACF6FD57714A2867A66E /* Pods-LKVideoPlayerKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKVideoPlayerKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-LKVideoPlayerKit_Tests/Pods-LKVideoPlayerKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		2C76DA60D931C1EAA633268C /* Pods_LKVideoPlayerKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LKVideoPlayerKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		454535F4310A7C8ACF9A3417 /* LKVideoPlayerKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LKVideoPlayerKit.podspec; path = ../LKVideoPlayerKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5030F521CF745B34F2962653 /* Pods_LKVideoPlayerKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LKVideoPlayerKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5542E4592B241BA82A97215C /* Pods-LKVideoPlayerKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKVideoPlayerKit_Example.release.xcconfig"; path = "Target Support Files/Pods-LKVideoPlayerKit_Example/Pods-LKVideoPlayerKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* LKVideoPlayerKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LKVideoPlayerKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,11 +57,9 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9F511A7225E0B0BD00EED587 /* LKVideoPlayer.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = LKVideoPlayer.podspec; path = ../LKVideoPlayer.podspec; sourceTree = "<group>"; };
 		9FB6107A2452B2F5007F6692 /* LKMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKMViewController.h; sourceTree = "<group>"; };
 		9FB6107B2452B2F5007F6692 /* LKMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKMViewController.m; sourceTree = "<group>"; };
-		BBD0039241AFCEA69EDE7BE3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		C5B2771311D1B5F62F303DF6 /* Pods-LKVideoPlayerKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKVideoPlayerKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-LKVideoPlayerKit_Tests/Pods-LKVideoPlayerKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		D021521FEB3D9DBD1697B31A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		DF19F49D8B2E1CAF443D32FB /* Pods-LKVideoPlayerKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKVideoPlayerKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-LKVideoPlayerKit_Example/Pods-LKVideoPlayerKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +82,6 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				D421DAC2B1AFE1EF0E53D408 /* Pods_LKVideoPlayerKit_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +117,6 @@
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
 				5030F521CF745B34F2962653 /* Pods_LKVideoPlayerKit_Example.framework */,
-				2C76DA60D931C1EAA633268C /* Pods_LKVideoPlayerKit_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -178,9 +170,7 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				454535F4310A7C8ACF9A3417 /* LKVideoPlayerKit.podspec */,
-				D021521FEB3D9DBD1697B31A /* README.md */,
-				BBD0039241AFCEA69EDE7BE3 /* LICENSE */,
+				9F511A7225E0B0BD00EED587 /* LKVideoPlayer.podspec */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -190,8 +180,6 @@
 			children = (
 				DF19F49D8B2E1CAF443D32FB /* Pods-LKVideoPlayerKit_Example.debug.xcconfig */,
 				5542E4592B241BA82A97215C /* Pods-LKVideoPlayerKit_Example.release.xcconfig */,
-				0106ACF6FD57714A2867A66E /* Pods-LKVideoPlayerKit_Tests.debug.xcconfig */,
-				C5B2771311D1B5F62F303DF6 /* Pods-LKVideoPlayerKit_Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -223,7 +211,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "LKVideoPlayerKit_Tests" */;
 			buildPhases = (
-				92F1437FCA01FF3A268AE6F0 /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
@@ -306,11 +293,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LKVideoPlayerKit_Example/Pods-LKVideoPlayerKit_Example-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/LKVideoPlayerKit/LKVideoPlayerKit.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/LKVideoPlayer/NEDADVideoPlayer.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LKVideoPlayerKit.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NEDADVideoPlayer.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -339,28 +326,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		92F1437FCA01FF3A268AE6F0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LKVideoPlayerKit_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		CB7E4BDED28C1E2C632E33DE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,12 +333,16 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LKVideoPlayerKit_Example/Pods-LKVideoPlayerKit_Example-frameworks.sh",
+				"${PODS_ROOT}/LookinServer/LookinServer.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/NEDMacros/NEDMacros.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NEDMacros.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,7 +518,6 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0106ACF6FD57714A2867A66E /* Pods-LKVideoPlayerKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -574,7 +542,6 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5B2771311D1B5F62F303DF6 /* Pods-LKVideoPlayerKit_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

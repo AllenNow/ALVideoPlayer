@@ -1,7 +1,7 @@
 {
-  "name": "LKVideoPlayerKit",
+  "name": "LKVideoPlayer",
   "version": "0.0.7",
-  "summary": "A short description of LKVideoPlayerKit.",
+  "summary": "A short description of LKVideoPlayer.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "http://git.luckincoffee.com/lkm-dev/MediaBrowseKit-iOS",
   "license": {
@@ -18,11 +18,11 @@
   "platforms": {
     "ios": "10.0"
   },
-  "source_files": "LKVideoPlayerKit/Classes/**/*.{h,m}",
-  "public_header_files": "LKVideoPlayerKit/Classes/*.h",
+  "source_files": "LKVideoPlayer/Classes/**/*.{h,m}",
+  "public_header_files": "LKVideoPlayer/Classes/*.h",
   "resource_bundles": {
-    "LKVideoPlayerKit": [
-      "LKVideoPlayerKit/Assets/*.png"
+    "LKVideoPlayer": [
+      "LKVideoPlayer/Assets/*.png"
     ]
   },
   "static_framework": true,
@@ -42,5 +42,5 @@
 
     ]
   },
-  "vendored_frameworks": "LKVideoPlayerKit/*.framework"
+  "vendored_frameworks": "LKVideoPlayer/*.framework"
 }
