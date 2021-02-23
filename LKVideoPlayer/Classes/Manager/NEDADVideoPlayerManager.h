@@ -40,8 +40,12 @@ typedef NS_ENUM(NSInteger, LKPlayerState) {
 
 /** playerLayerView */
 @property (nonatomic, strong, readonly) UIView *playerLayerView;
-+ (instancetype)playerManagerWithDelegate:(id<LKPlayerManagerDelegate>)delegate playerStatusModel:(NEDADVideoStatusModel *)playerStatusModel;
-- (void)initPlayerWithUrl:(NSURL *)url;
+
++ (instancetype)manager;
+
+- (void)updateManagerDelegate:(id <LKPlayerManagerDelegate>)delegate playerStatusModel:(NEDADVideoStatusModel *)playerStatusModel;
+
+- (void)initPlayerWithUrl:(NSString *)urlString;
 
 /** 获取视频时长，单位：秒 */
 @property (nonatomic, assign, readonly) double duration;

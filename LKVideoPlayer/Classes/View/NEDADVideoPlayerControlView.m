@@ -11,6 +11,7 @@
 @import NEDMacros;
 #import "NEDADVideoStatusModel.h"
 #import "NEDADVideoPlayerImage.h"
+#import "NEDADVideoLockCoverView.h"
 
 static const CGFloat LKPlayerAnimationTimeInterval             = 3.0f;
 static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
@@ -95,6 +96,7 @@ static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
     [self addSubview:self.repeatBtn];
     [self addSubview:self.failBtn];
     [self addSubview:self.progressView];
+    [self addSubview:self.lockToolView];
     
     [self addSubview:self.fastView];
     [self.fastView addSubview:self.fastImageView];
@@ -105,8 +107,6 @@ static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
     [self.watchrRecordView addSubview:self.closeWatchrRecordBtn];
     [self.watchrRecordView addSubview:self.watchrRecordLabel];
     [self.watchrRecordView addSubview:self.jumpPlayBtn];
-    
-    
 }
 
 // 设置子控件的响应事件
@@ -148,7 +148,6 @@ static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
     [self hideWatchrRecordView];
 }
 
-
 #pragma mark - Private Method
 
 /**
@@ -157,6 +156,9 @@ static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
 - (void)showControlView {
     self.controlView.hidden = NO;
     self.progressView.hidden = YES;
+    [self.lockToolView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.inset(33);
+    }];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 
@@ -166,6 +168,9 @@ static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
 - (void)hideControlView {
     self.controlView.hidden = YES;
     self.progressView.hidden = NO;
+    [self.lockToolView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.inset(0);
+    }];
     if (self.playerStatusModel.isFullScreen && !self.playeEnd) {
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     }
@@ -313,6 +318,7 @@ static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
 }
 
 
+
 /** 准备开始播放, 隐藏loading */
 - (void)readyToPlay {
     [self.activity stopAnimating];
@@ -433,7 +439,12 @@ static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
     
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
-        make.height.mas_equalTo(10);
+        make.height.mas_equalTo(2);
+    }];
+    
+    [self.lockToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self);
+        make.bottom.inset(33);
     }];
 }
 
@@ -560,5 +571,17 @@ static const CGFloat LKPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
     return _progressView;
 }
 
+- (NEDADVideoLockToolView *)lockToolView {
+    if (!_lockToolView) {
+        __weak typeof(self) weakself = self;
+        _lockToolView = [[NEDADVideoLockToolView alloc] initWithAction:^{
+            __strong typeof(weakself) strongself = weakself;
+            if ([strongself.delegate respondsToSelector:@selector(controlViewDidClickUnlock:)]) {
+                [strongself.delegate controlViewDidClickUnlock:strongself];
+            }
+        }];
+    }
+    return _lockToolView;
+}
 
 @end

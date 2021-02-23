@@ -45,7 +45,7 @@
 
 #pragma mark - Public method
 /** 更新封面图片 */
-- (void)syncCoverImageViewWithURLString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage {
+- (void)syncCoverImageViewWithURLString:(NSString *)urlString {
     [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[NEDADVideoPlayerImage imageNamed:@"bg_advideo_play_placeholder"]];;
 }
 

@@ -9,6 +9,7 @@
 #import "NEDADVideoPlayerControlView.h"
 
 @class NEDADVideoStatusModel;
+@class NEDADVideoPlayerView;
 
 @protocol NEDVideoPlayerViewDelagate <NSObject>
 @optional
@@ -22,6 +23,8 @@
 - (void)panHorizontalEndMoved;
 /** 音量改变 */
 - (void)volumeValueChange:(CGFloat)value;
+
+- (void)playerControlViewDidClickUnLock:(NEDADVideoPlayerView *)controlView;
 
 @end
 
@@ -39,6 +42,9 @@
 
 /** 当前是否为全屏，默认为NO */
 //@property (nonatomic, assign, getter=isFullScreen, readonly) BOOL fullScreen;
+
+- (void)showLockViewWithPlayerModel:(NEDADVideoPlayerModel *)playerModel isPreview:(BOOL)isPreview;
+- (void)hideLockView;
 
 // 设置播放视图
 - (void)setPlayerLayerView:(UIView *)playerLayerView;

@@ -10,7 +10,7 @@
 @protocol NEDADVideoControlViewDelegate <NSObject>
 
 ///** 播放暂停按钮被点击, 是否选中，选中时当前为播发，按钮为暂停的 */
-- (void)portraitPlayPauseButtonClick:(BOOL)isSelected;
+//- (void)portraitPlayPauseButtonClick:(BOOL)isSelected;
 ///** 进度条开始拖动 */
 //- (void)portraitProgressSliderBeginDrag;
 ///** 进度结束拖动，并返回最后的值 */
@@ -39,7 +39,10 @@
 
 @interface NEDADVideoControlView : UIView
 @property (nonatomic, weak) id<NEDADVideoControlViewDelegate> delegate;
-@property (nonatomic, copy) NSString *title;
+/// 有标题的类型(无标题直接使用-init)
+/// @param title 视频标题内容
+/// @param label 视频标签内容
+- (void)updateTitle:(nullable NSString  *)title label:(nullable NSString  *)label;
 
 
 /** 重置ControlView */

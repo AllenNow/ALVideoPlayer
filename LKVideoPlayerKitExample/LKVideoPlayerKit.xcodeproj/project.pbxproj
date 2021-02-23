@@ -22,6 +22,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		86BDA1C825185670BC1C07B9 /* Pods_LKVideoPlayerKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5030F521CF745B34F2962653 /* Pods_LKVideoPlayerKit_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		9F779E2525E4F69200D3CF5C /* LKMTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F779E2425E4F69200D3CF5C /* LKMTestCell.m */; };
 		9FB6107C2452B2F5007F6692 /* LKMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6107B2452B2F5007F6692 /* LKMViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,8 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F511A7225E0B0BD00EED587 /* LKVideoPlayer.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = LKVideoPlayer.podspec; path = ../LKVideoPlayer.podspec; sourceTree = "<group>"; };
+		9F779E2325E4F69200D3CF5C /* LKMTestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMTestCell.h; sourceTree = "<group>"; };
+		9F779E2425E4F69200D3CF5C /* LKMTestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMTestCell.m; sourceTree = "<group>"; };
 		9FB6107A2452B2F5007F6692 /* LKMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKMViewController.h; sourceTree = "<group>"; };
 		9FB6107B2452B2F5007F6692 /* LKMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKMViewController.m; sourceTree = "<group>"; };
 		DF19F49D8B2E1CAF443D32FB /* Pods-LKVideoPlayerKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKVideoPlayerKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-LKVideoPlayerKit_Example/Pods-LKVideoPlayerKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				9F779E2325E4F69200D3CF5C /* LKMTestCell.h */,
+				9F779E2425E4F69200D3CF5C /* LKMTestCell.m */,
 			);
 			name = "Example for LKVideoPlayerKit";
 			path = LKVideoPlayerKit;
@@ -357,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F779E2525E4F69200D3CF5C /* LKMTestCell.m in Sources */,
 				6003F59E195388D20070C39A /* LKAppDelegate.m in Sources */,
 				9FB6107C2452B2F5007F6692 /* LKMViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

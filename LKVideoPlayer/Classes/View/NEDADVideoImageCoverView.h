@@ -15,6 +15,6 @@
 @interface NEDADVideoImageCoverView : UIView
 @property (nonatomic, weak) id<NEDCoverControlViewDelegate> delegate;
 
-- (void)syncCoverImageViewWithURLString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage;
+- (void)syncCoverImageViewWithURLString:(NSString *)urlString;
 
 @end

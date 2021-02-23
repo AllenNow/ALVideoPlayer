@@ -9,23 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface NEDADVideoPlayerModel : NSObject
-/** 视频标题 */
-@property (nonatomic, copy  ) NSString     *title;
-/** 视频URL */
-@property (nonatomic, strong) NSURL        *videoURL;
-/** 视频封面本地图片 */
-@property (nonatomic, strong) UIImage      *placeholderImage;
-/**
- * 视频封面网络图片url
- * 如果和本地图片同时设置，则忽略本地图片，显示网络图片
- */
-@property (nonatomic, copy  ) NSString     *placeholderImageURLString;
-/** 视频分辨率 */
-@property (nonatomic, strong) NSDictionary *resolutionDic;
-/** 从xx秒开始播放视频(默认0) */
-@property (nonatomic, assign) NSInteger    seekTime;
-/** 上次播放至xx秒(默认0) */
-@property (nonatomic, assign) NSInteger    viewTime;
-/** 视频的ID */
-@property (nonatomic, assign) NSInteger    videoId;
+
+///视频标题
+@property (nonatomic, copy) NSString *title;
+//// 视频标签 如：热门 精彩推荐
+@property (nonatomic, copy) NSString *videoLabel;
+///视频URL
+@property (nonatomic, copy) NSString *videoURLString;
+///视频封面
+@property (nonatomic, copy) NSString *videoCoverImageURLString;
+///视频需要解锁的时间 为-1，不需要解锁，为0则一开始就需要解锁 , 单位秒
+@property (nonatomic, assign) NSInteger lockTime;
+
 @end

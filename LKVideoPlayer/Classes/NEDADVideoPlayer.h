@@ -7,8 +7,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NEDADVideoPlayerModel.h"
+#import "NEDADVideoPlayerManager.h"
 
-@class LKVideoPlayer;
+@class NEDADVideoPlayer;
 
 @protocol NEDADVideoPlayerDelegate <NSObject>
 
@@ -22,16 +23,27 @@
 - (void)playerSeekTimeAction;
 
 /** 全屏按钮被点击 */
-- (void)portraitFullScreenButtonClick;
+- (void)playerEnterFullScreen:(NEDADVideoPlayer *)player;
 
 /** 退出全屏按钮被点击 */
-- (void)landScapeExitFullScreenButtonClick;
+- (void)playerExitFullScreen:(NEDADVideoPlayer *)player;
+
+/// 视频需要打开广告
+/// @param player 播放器
+- (void)playerWillOpenAD:(NEDADVideoPlayer *)player;
+
+- (void)playerDidClickCoverPlay:(NEDADVideoPlayer *)player;
+
 
 @end
 
 @interface NEDADVideoPlayer : NSObject
 /** 是否被用户暂停 */
-@property (nonatomic, assign, readonly) BOOL          isPauseByUser;
+@property (nonatomic, assign, readonly) BOOL isPauseByUser;
+@property (nonatomic, strong) NSIndexPath *indexPath;
+@property (nonatomic, weak) UIView *playerSuperView;
+/** 获取当前状态 */
+@property (nonatomic, assign) LKPlayerState state;
 
 /**
  创建视频播放视图类
@@ -53,8 +65,13 @@
 
 /** 播放视频 */
 - (void)playVideo;
+
+/** 解锁视频 */
+- (void)unLockVideo;
+
 /** 暂停视频播放 */
 - (void)pauseVideo;
+
 /** 停止视频播放 */
 - (void)stopVideo;
 

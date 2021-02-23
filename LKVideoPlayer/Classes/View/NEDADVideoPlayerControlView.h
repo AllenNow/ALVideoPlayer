@@ -10,7 +10,11 @@
 #import "NEDADVideoImageCoverView.h"
 #import "NEDADVideoLoadingView.h"
 #import "NEDADVideoProgressView.h"
+#import "NEDADVideoPlayerModel.h"
+#import "NEDADVideoLockToolView.h"
 @class NEDADVideoStatusModel;
+@class NEDADVideoPlayerControlView;
+
 
 @protocol LKPlayerControlViewDelagate <NSObject>
 @optional
@@ -22,6 +26,8 @@
 //- (void)closeWatchrRecordButtonClick;
 /** 跳转播放按钮被点击 */
 - (void)jumpPlayButtonClick:(NSInteger)viewTime;
+
+- (void)controlViewDidClickUnlock:(NEDADVideoPlayerControlView *)controlView;
 
 @end
 
@@ -35,6 +41,8 @@
 @property (nonatomic, strong) NEDADVideoControlView *controlView;
 
 @property (nonatomic, strong) NEDADVideoProgressView *progressView;
+
+@property (nonatomic, strong) NEDADVideoLockToolView *lockToolView;
 /** 上次播放至xx秒(默认0) */
 @property (nonatomic, assign) NSInteger viewTime;
 

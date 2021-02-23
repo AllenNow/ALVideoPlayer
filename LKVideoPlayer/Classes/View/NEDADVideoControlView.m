@@ -26,7 +26,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        // 添加子控件
         [self addSubview:self.backgroundImageView];
         [self addSubview:self.titleBar];
         [self addSubview:self.bottomToolBar];
@@ -41,7 +40,6 @@
             make.height.mas_equalTo(88);
         }];
         
-        // 设置子控件的响应事件
         [self.bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left);
             make.right.equalTo(self.mas_right);
@@ -187,10 +185,12 @@
     return _titleBar;
 }
 
-- (void)setTitle:(NSString *)title {
-    _title = title;
-    
-    
+/// 有标题的类型(无标题直接使用-init)
+/// @param title 视频标题内容
+/// @param label 视频标签内容
+- (void)updateTitle:(nullable NSString  *)title label:(nullable NSString  *)label {
+    self.titleBar.label = label;
+    self.titleBar.title = title;
 }
 
 @end

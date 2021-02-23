@@ -53,7 +53,6 @@
 }
 
 - (void)syncplayTime:(NSInteger)time {
-    
     if (time < 0) {
         return;
     }

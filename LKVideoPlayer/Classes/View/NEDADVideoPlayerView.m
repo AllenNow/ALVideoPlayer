@@ -7,8 +7,9 @@
 
 #import "NEDADVideoPlayerView.h"
 @import Masonry;
-#import "NEDADVideoBrightnessView.h"
 #import "NEDADVideoStatusModel.h"
+#import "NEDADVideoLockCoverView.h"
+#import "NEDPanDirectionGestureRecognizer.h"
 
 // 枚举值，包含水平移动方向和垂直移动方向
 typedef NS_ENUM(NSInteger, PanDirection){
@@ -37,7 +38,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
 /** 双击 */
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
 /** 滑动 */
-@property (nonatomic, strong) UIPanGestureRecognizer *panRecognizer;
+@property (nonatomic, strong) NEDPanDirectionGestureRecognizer *panRecognizer;
+
+@property (nonatomic, strong) NEDADVideoLockCoverView *lockView;
+
 @end
 
 @implementation NEDADVideoPlayerView
@@ -85,6 +89,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 - (void)__setupSuViews {
     [self addSubview:self.loadingView];
     [self addSubview:self.coverControlView];
+    [self addSubview:self.lockView];
     
     [self.coverControlView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.leading.trailing.bottom.equalTo(self);
@@ -92,6 +97,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
     
     [self.loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.equalTo(self);
+    }];
+    
+    [self.lockView  mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
     }];
 }
 
@@ -108,6 +117,17 @@ typedef NS_ENUM(NSInteger, PanDirection){
     [self mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.mas_equalTo(superView);
     }];
+}
+
+- (void)showLockViewWithPlayerModel:(NEDADVideoPlayerModel *)playerModel isPreview:(BOOL)isPreview {
+    [self.lockView show];
+    [self.lockView updateTitle:playerModel.title label:playerModel.videoLabel];
+    self.lockView.isPreview = isPreview;
+    self.loadingView.hidden = YES;
+}
+
+- (void)hideLockView {
+    [self.lockView hide];
 }
 
 - (void)ui {
@@ -155,7 +175,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     [self.singleTap requireGestureRecognizerToFail:self.doubleTap];
     
     // 添加平移手势，用来控制音量、亮度、快进快退
-    self.panRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panDirection:)];
+    self.panRecognizer = [[NEDPanDirectionGestureRecognizer alloc] initWithTarget:self action:@selector(panDirection:) andDirection:NEDPanGestureRecognizerDirectionHorizontal];
     self.panRecognizer.delegate = self;
     [self.panRecognizer setMaximumNumberOfTouches:1];
     [self.panRecognizer setDelaysTouchesBegan:YES];
@@ -217,30 +237,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onDeviceOrientationChange)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil
-     ];
-}
-
-/**
- *  屏幕方向发生变化会调用这里
- */
-- (void)onDeviceOrientationChange {
-    
-    if (![NEDADVideoBrightnessView sharedBrightnessView].isStartPlay || !_playerControlView) {
-        return;
-    }
-    
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    if (orientation == UIDeviceOrientationFaceUp || orientation == UIDeviceOrientationFaceDown || orientation == UIDeviceOrientationUnknown || orientation == UIDeviceOrientationPortraitUpsideDown) { return; }
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
-        [self setOrientationLandscapeConstraint];
-    } else {
-        [self setOrientationPortraitConstraint];
-    }
-    [self layoutIfNeeded];
 }
 
 /**
@@ -403,6 +399,14 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        CGPoint veloctyPoint = [((UIPanGestureRecognizer *)gestureRecognizer) velocityInView:self];
+        CGFloat x = fabs(veloctyPoint.x);
+        CGFloat y = fabs(veloctyPoint.y);
+        NSLog(@"-------%f",x);
+        if ( x > 5 && y > 5 && x < y ) {
+            return NO;
+        }
+
         if (self.playerStatusModel.playDidEnd){
             return NO;
         }
@@ -422,6 +426,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - Public method
 - (void)setPlayerLayerView:(UIView *)playerLayerView {
     _playerLayerView = playerLayerView;
+    
     [self insertSubview:playerLayerView atIndex:0];
     [playerLayerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.bottom.mas_equalTo(self);
@@ -508,6 +513,20 @@ typedef NS_ENUM(NSInteger, PanDirection){
         _loadingView = [[NEDADVideoLoadingView alloc] init];
     }
     return _loadingView;
+}
+
+- (NEDADVideoLockCoverView *)lockView {
+    if (!_lockView) {
+        __weak typeof(self) weakself = self;
+        _lockView = [[NEDADVideoLockCoverView alloc] initWithAction:^{
+            __strong typeof(weakself) strongself = weakself;
+            if ([strongself.delegate respondsToSelector:@selector(playerControlViewDidClickUnLock:)]) {
+                [strongself.delegate playerControlViewDidClickUnLock:strongself];
+            }
+        }];
+        _lockView.hidden = YES;
+    }
+    return _lockView;
 }
 
 @end

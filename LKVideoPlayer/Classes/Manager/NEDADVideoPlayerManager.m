@@ -8,6 +8,7 @@
 #import "NEDADVideoPlayerManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import "NEDADVideoStatusModel.h"
+#import "NEDADVideoPlayerView.h"
 @import IJKMediaFramework;
 
 @interface NEDADVideoPlayerManager ()
@@ -29,13 +30,18 @@
 
 @implementation NEDADVideoPlayerManager
 
-+ (instancetype)playerManagerWithDelegate:(id<LKPlayerManagerDelegate>)delegate playerStatusModel:(NEDADVideoStatusModel *)playerStatusModel {
-    
-    NEDADVideoPlayerManager *playerMgr = [[NEDADVideoPlayerManager alloc] init];
-    playerMgr.delegate = delegate;
-    playerMgr.playerStatusModel = playerStatusModel;
-    
-    return playerMgr;
+- (void)updateManagerDelegate:(id <LKPlayerManagerDelegate>)delegate playerStatusModel:(NEDADVideoStatusModel *)playerStatusModel {
+    self.delegate = delegate;
+    self.playerStatusModel = playerStatusModel;
+}
+
++ (instancetype)manager {
+    static NEDADVideoPlayerManager *manager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[self alloc] init];
+    });
+    return manager;
 }
 
 - (void)dealloc {
@@ -48,12 +54,12 @@
 /**
  根据视频url初始化player
 
- @param url 视频连接
+ @param urlString 视频连接
  */
-- (void)initPlayerWithUrl:(NSURL *)url {
+- (void)initPlayerWithUrl:(NSString *)urlString {
     IJKFFOptions *options = [IJKFFOptions optionsByDefault];
     
-    self.player = [[IJKFFMoviePlayerController alloc] initWithContentURL:url withOptions:options];
+    self.player = [[IJKFFMoviePlayerController alloc] initWithContentURL: [NSURL URLWithString:urlString] withOptions:options];
     [self configureVolume];
     [self addPlayerNotificationObservers];
     [self addBackgroundNotificationObservers];
@@ -213,7 +219,6 @@
     
     if (self.player.playbackState == IJKMPMoviePlaybackStatePlaying) {
         //视频开始播放的时候开启计时器
-        
         if (!self.timer) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(update) userInfo:nil repeats:YES];
             [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
@@ -326,6 +331,7 @@
     self.playerStatusModel.playDidEnd = NO;
 }
 
+//暂停播放
 - (void)pause {
     if (self.state == LKPlayerStatePlaying || self.state == LKPlayerStateBuffering) {
         [self.player pause];
@@ -343,13 +349,17 @@
     [self.timer invalidate];
     self.timer = nil;
     
+    UIView *superView = self.playerLayerView.superview;
+    if ([superView isKindOfClass:[NEDADVideoPlayerView class]]) {
+        ((NEDADVideoPlayerView *)superView).coverControlView.hidden = NO;
+    }
     [self.playerLayerView removeFromSuperview];
     _playerLayerView = nil;
     self.player = nil;
     self.initReadyToPlay = NO;
 }
 
-- (void)seekToTime:(NSInteger)dragedSeconds completionHandler:(void (^)())completionHandler {
+- (void)seekToTime:(NSInteger)dragedSeconds completionHandler:(void (^)(void))completionHandler {
     
     [self.player pause];
     

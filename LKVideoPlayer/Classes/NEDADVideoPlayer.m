@@ -7,10 +7,11 @@
 //
 
 #import "NEDADVideoPlayer.h"
-#import "NEDADVideoPlayerManager.h"
+
 #import "NEDADVideoPlayerView.h"
 #import "NEDADVideoStatusModel.h"
-#import "NEDADVideoBrightnessView.h"
+@import Masonry;
+@import NEDMacros;
 
 @interface NEDADVideoPlayer () <
     LKPlayerManagerDelegate,
@@ -36,6 +37,7 @@
 @property (nonatomic, assign) CGFloat sumTime;
 /** 是否被用户暂停 */
 @property (nonatomic, assign) BOOL isPauseByUser;
+@property (nonatomic, assign) BOOL isFullScreen;
 
 @end
 
@@ -61,11 +63,12 @@
     videoPlayer.videoPlayerView.playerControlView.delegate = videoPlayer;
     videoPlayer.videoPlayerView.playerControlView.controlView.delegate = videoPlayer;
     videoPlayer.videoPlayerView.coverControlView.delegate = videoPlayer;
+    videoPlayer.playerSuperView = view;
     
     // !!!: 创建AVPlayer管理
-    videoPlayer.playerMgr = [NEDADVideoPlayerManager playerManagerWithDelegate:videoPlayer playerStatusModel:videoPlayer.playerStatusModel];
-    videoPlayer.isPauseByUser = YES;
+    videoPlayer.playerMgr = [NEDADVideoPlayerManager manager];
     
+    videoPlayer.isPauseByUser = YES;
     // 设置基本模型 (最后设置)
     videoPlayer.playerModel = playerModel;
     return videoPlayer;
@@ -84,16 +87,18 @@
     _playerModel = playerModel;
     
     // 同步一些属性
-    [self.videoPlayerView.coverControlView syncCoverImageViewWithURLString:playerModel.placeholderImageURLString placeholderImage:playerModel.placeholderImage];
-    self.playerMgr.seekTime = self.playerModel.seekTime;
-    self.videoPlayerView.playerControlView.viewTime = self.playerModel.viewTime;
-    self.videoPlayerView.playerControlView.controlView.title = self.playerModel.title;
+    [self.videoPlayerView.coverControlView syncCoverImageViewWithURLString:playerModel.videoCoverImageURLString];
+    self.playerMgr.seekTime = 0;
+    self.videoPlayerView.playerControlView.viewTime = 0;
+    [self.videoPlayerView.playerControlView.controlView updateTitle:self.playerModel.title label:self.playerModel.videoLabel];
+    self.videoPlayerView.playerControlView.lockToolView.lockSecond = self.playerModel.lockTime;
+    self.videoPlayerView.playerControlView.lockToolView.hidden = self.playerModel.lockTime < 0;
 }
 
 /** 自动播放，默认不自动播放 */
 - (void)autoPlayTheVideo {
     [self configLKPlayer];
-    [self.videoPlayerView.coverControlView removeFromSuperview];
+    self.videoPlayerView.coverControlView.hidden = YES;
     self.videoPlayerView.loadingView.hidden = NO;
 }
 
@@ -105,7 +110,8 @@
     }
     
     [self.videoPlayerView.playerControlView loading];
-    [self.playerMgr initPlayerWithUrl:self.playerModel.videoURL];
+    [self.playerMgr initPlayerWithUrl:self.playerModel.videoURLString];
+    [self.playerMgr updateManagerDelegate:self playerStatusModel:self.playerStatusModel];
     [self.videoPlayerView setPlayerLayerView:self.playerMgr.playerLayerView];
     self.isPauseByUser = NO;
 }
@@ -144,6 +150,13 @@
     }
 }
 
+- (void)unLockVideo {
+    [self.videoPlayerView hideLockView];
+    self.playerModel.lockTime = -1;
+    self.playerModel = self.playerModel;
+    [self playVideo];
+}
+
 - (void)pauseVideo {
     [self.playerMgr pause];
 }
@@ -157,7 +170,6 @@
 - (void)changePlayerState:(LKPlayerState)state {
     switch (state) {
         case LKPlayerStateReadyToPlay:{
-            
             [self.videoPlayerView.playerControlView readyToPlay];
         }
             break;
@@ -182,8 +194,6 @@
         case LKPlayerStateFailed: {
             [self.videoPlayerView loadFailed];
             self.videoPlayerView.loadingView.hidden = YES;
-            
-            [NEDADVideoBrightnessView sharedBrightnessView].isStartPlay = YES;
             [self.videoPlayerView.playerControlView loadFailed];
         }
             break;
@@ -208,6 +218,13 @@
         return;
     }
     
+    if (self.playerModel.lockTime !=-1 && self.playerModel.lockTime <= second) {
+        [self.playerMgr pause];
+        [self.videoPlayerView showLockViewWithPlayerModel:self.playerModel isPreview:YES];
+    } else {
+        [self.videoPlayerView hideLockView];
+    }
+    
     self.videoPlayerView.playerControlView.progressView.playProgress = progress;
     [self.videoPlayerView.playerControlView.controlView syncplayProgress:progress];
     [self.videoPlayerView.playerControlView.controlView syncplayTime:second];
@@ -225,7 +242,6 @@
 - (void)playerReadyToPlay {
     [self.videoPlayerView startReadyToPlay];
     self.videoPlayerView.loadingView.hidden = YES;
-    [NEDADVideoBrightnessView sharedBrightnessView].isStartPlay = YES;
 }
 
 #pragma mark - LKPlayerControlViewDelagate
@@ -256,6 +272,12 @@
         return;
     }
     [self.playerMgr seekToTime:viewTime completionHandler:nil];
+}
+
+- (void)controlViewDidClickUnlock:(NEDADVideoPlayerView *)controlView {
+    if ([self.delegate respondsToSelector:@selector(playerWillOpenAD:)]) {
+        [self.delegate playerWillOpenAD:self];
+    }
 }
 
 #pragma mark - LKControlViewDelegate
@@ -297,9 +319,37 @@
     // 延迟隐藏控制层
     [self.videoPlayerView.playerControlView autoFadeOutControlView];
     [self.videoPlayerView shrinkOrFullScreen:YES];
-    if ([_delegate respondsToSelector:@selector(portraitFullScreenButtonClick)]) {
-        [_delegate portraitFullScreenButtonClick];
+    
+    if (self.isFullScreen) {
+        self.isFullScreen = NO;
+        [self.videoPlayerView removeFromSuperview];
+        [self.playerSuperView addSubview:self.videoPlayerView];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.videoPlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(0);
+            }];
+            self.videoPlayerView.transform = CGAffineTransformMakeRotation(0);
+        }];
+    } else {
+        self.isFullScreen = YES;
+        [self.videoPlayerView removeFromSuperview];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.videoPlayerView];
+        [self.videoPlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(0);
+            make.width.mas_equalTo(UI_SCREEN_HEIGHT);
+            make.height.mas_equalTo(UI_SCREEN_WIDTH);
+        }];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.videoPlayerView layoutIfNeeded];
+            self.videoPlayerView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        }];
     }
+    
+    if ([self.delegate respondsToSelector:@selector(playerEnterFullScreen:)]) {
+        [self.delegate playerEnterFullScreen:self];
+    }
+    
 }
 
 //计算出拖动的当前秒数
@@ -372,8 +422,8 @@
     [self.videoPlayerView.playerControlView autoFadeOutControlView];
     
     [self.videoPlayerView shrinkOrFullScreen:NO];
-    if ([_delegate respondsToSelector:@selector(landScapeExitFullScreenButtonClick)]) {
-        [_delegate landScapeExitFullScreenButtonClick];
+    if ([self.delegate respondsToSelector:@selector(playerExitFullScreen:)]) {
+        [self.delegate playerExitFullScreen:self];
     }
 }
 
@@ -433,17 +483,14 @@
     
     [self.videoPlayerView.playerControlView.controlView syncplayProgress:draggedValue];
     [self.videoPlayerView.playerControlView.controlView syncplayTime:self.sumTime];
-    
     // 展示快进/快退view
     [self.videoPlayerView.playerControlView showFastView:self.sumTime totalTime:totalMovieDuration isForward:style];
-    
 }
 
 /** pan结束水平移动 */
 - (void)panHorizontalEndMoved {
     // 隐藏快进/快退view
     [self.videoPlayerView.playerControlView hideFastView];
-    
     // seekTime
     self.playerStatusModel.pauseByUser = NO;
     [self.playerMgr seekToTime:self.sumTime completionHandler:nil];
@@ -456,18 +503,36 @@
     [self.playerMgr changeVolume:value];
 }
 
+- (void)playerControlViewDidClickUnLock:(NEDADVideoPlayerView *)controlView {
+    if ([self.delegate respondsToSelector:@selector(playerWillOpenAD:)]) {
+        [self.delegate playerWillOpenAD:self];
+    }
+}
+
 #pragma mark - LKLoadingViewDelegate
 
 #pragma mark - LKCoverControlViewDelegate
 
 /** 封面图片Tap事件 */
 - (void)coverControlViewDidClick:(UIView *)controlView {
+    if (self.playerModel.lockTime == 0) {
+        [self.videoPlayerView showLockViewWithPlayerModel:self.playerModel isPreview:NO];
+        self.videoPlayerView.coverControlView.hidden = YES;
+        return;
+    }
+    self.state = LKPlayerStatePlaying;
+    [self.videoPlayerView hideLockView];
     [self autoPlayTheVideo];
+    
+    if ([self.delegate respondsToSelector:@selector(playerDidClickCoverPlay:)]) {
+        [self.delegate playerDidClickCoverPlay:self];
+    }
 }
 
 #pragma mark - 对象释放
 
 - (void)dealloc {
+    NSLog(@"player销毁了");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self destroyVideo];
 }
